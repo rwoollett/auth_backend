@@ -1,0 +1,5 @@
+
+For the node.js server express app:
+export PORT=3001
+export DOCTYPE=DYNAMODB
+
