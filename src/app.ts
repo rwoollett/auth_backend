@@ -14,7 +14,7 @@ import { homeRouter } from './routes/home';
 
 const envWhitelist = process.env.WHITELIST_CORS ? (process.env.WHITELIST_CORS as string).split(',') : [];
 const whitelist = [
-  'http://127.0.0.1:3000'
+  'http://localhost:3000'
 ].concat(envWhitelist);
 console.log('Whitelist',whitelist);
 const app = express();
