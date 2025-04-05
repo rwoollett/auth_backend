@@ -2,3 +2,4 @@
 .git/
 dist
 docker-compose.yml
+.env

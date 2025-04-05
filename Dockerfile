@@ -26,7 +26,6 @@ ENV NODE_ENV=${NODE_ENV}
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/.env ./.env
 
 EXPOSE 3001
 
