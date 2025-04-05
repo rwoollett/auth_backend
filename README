@@ -3,3 +3,4 @@ For the node.js server express app:
 export PORT=3001
 export DOCTYPE=DYNAMODB
 
+docker build -t auth:v1.0 -f Dockerfile .
