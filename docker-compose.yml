@@ -12,7 +12,7 @@ services:
     env_file: .env
     command: sh -c "npm install --omit=dev && npm start"
     ports:
-      - 8080:3001
+      - 3001:3001
     working_dir: /app
     volumes:
       - ./:/app
@@ -23,6 +23,7 @@ services:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+      WHITELIST_CORS: ${WHITELIST_CORS}
     # depends_on:
     #   - auth-mongo
 #     networks:

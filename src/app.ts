@@ -13,8 +13,9 @@ import { indexRouter } from './routes';
 import { homeRouter } from './routes/home';
 
 const envWhitelist = process.env.WHITELIST_CORS ? (process.env.WHITELIST_CORS as string).split(',') : [];
+console.log('envWhitelist',envWhitelist);
 const whitelist = [
-  'http://localhost:3000'
+  'http://localhost:8080'
 ].concat(envWhitelist);
 console.log('Whitelist',whitelist);
 const app = express();
@@ -36,6 +37,7 @@ app.use(cors({
     return callback(null, true);
   },
   credentials: true,
+  allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
 }));
 
 app.use((
@@ -43,7 +45,8 @@ app.use((
   res: Response,
   next: NextFunction
 ) => {
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
 
