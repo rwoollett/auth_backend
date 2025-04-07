@@ -5,6 +5,7 @@ import cookieSession from 'cookie-session';
 import cors from 'cors';
 
 import { currentUserRouter } from "./routes/current-user";
+import { currentTokenRouter } from './routes/current-token';
 import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
@@ -59,6 +60,7 @@ app.use(
 );
 
 app.use(currentUserRouter);
+app.use(currentTokenRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
