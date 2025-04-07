@@ -53,6 +53,7 @@ app.use((
 
 app.use(
   cookieSession({
+    name: "auth:sess",
     signed: false,
     secure: false,//(process.env.NODE_ENV === 'production'),
     httpOnly: true,
