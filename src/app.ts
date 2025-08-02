@@ -9,7 +9,6 @@ import { currentTokenRouter } from './routes/current-token';
 import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
-import { indexRouter } from './routes';
 import { homeRouter } from './routes/home';
 import { NotFoundError } from './errors/not-found-error';
 import { errorHandler } from './middlewares/error-handler';
