@@ -66,7 +66,6 @@ app.use(currentTokenRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
-app.use(indexRouter);
 app.use(homeRouter);
 
 app.all('*', async (req: Request, res: Response) => {
