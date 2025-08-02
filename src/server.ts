@@ -1,7 +1,6 @@
 import { app } from './app';
 import { DatabaseConnectionError } from './errors/database-connection-error';
 import { documentDB } from './models';
-//import { DatabaseConnectionError } from '@rwtix/common';
 
 const start = async () => {
   console.log('Starting up.....');
