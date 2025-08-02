@@ -1,4 +1,3 @@
-import { NotAuthorizedError } from '@rwtix/common';
 import express, { NextFunction, Request, Response } from 'express';
 const router = express.Router();
 

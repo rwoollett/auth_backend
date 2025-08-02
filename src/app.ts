@@ -9,9 +9,10 @@ import { currentTokenRouter } from './routes/current-token';
 import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
-import { NotFoundError, errorHandler } from '@rwtix/common';
 import { indexRouter } from './routes';
 import { homeRouter } from './routes/home';
+import { NotFoundError } from './errors/not-found-error';
+import { errorHandler } from './middlewares/error-handler';
 
 const envWhitelist = process.env.WHITELIST_CORS ? (process.env.WHITELIST_CORS as string).split(',') : [];
 console.log('envWhitelist',envWhitelist);
