@@ -4,3 +4,5 @@ npm-debug.log
 jsdist
 .env
 api.http
+jest-env-setup.js
+set_env.sh

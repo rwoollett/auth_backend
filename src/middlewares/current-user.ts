@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { NotAuthorizedError } from '../errors/not-authorised-error';
 
 interface UserPayload {
-  id:string;
-  email:string;
+  id: string;
+  email: string;
+  accessToken: string;
 }
 
 declare global {
@@ -15,8 +17,8 @@ declare global {
 }
 
 export const currentUser = (
-  req: Request, 
-  res: Response, 
+  req: Request,
+  res: Response,
   next: NextFunction
 ) => {
   if (!req.session?.jwt) {
@@ -25,11 +27,14 @@ export const currentUser = (
 
   try {
     const payload = jwt.verify(
-      req.session.jwt, 
+      req.session.jwt,
       process.env.JWT_KEY!) as UserPayload;
 
-    req.currentUser = payload;
-  } catch(err) { }
+    req.currentUser = { ...payload, accessToken: req.session.jwt };
+
+  } catch (err) {
+    throw new NotAuthorizedError();
+  }
 
   next();
 };

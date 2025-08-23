@@ -22,32 +22,43 @@ router.post('/api/users/signin',
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    const existingUser = await User.findOne({email});
+    const existingUser = await User.findOne({ email });
 
     if (!existingUser) {
       throw new BadRequestError("Invalid credentials");
     }
 
     const passwordsMatch = await Password.compare(
-      existingUser.password, 
+      existingUser.password,
       password);
     if (!passwordsMatch) {
       throw new BadRequestError('Invalid credentials');
     }
 
-    // Generate JWT
-    const userJwt = jwt.sign({
+    // Generate Access JWT
+    const payload = {
       id: existingUser.id,
       email: existingUser.email
-      }, 
-      process.env.JWT_KEY!
+    }; 
+    const userJwt = jwt.sign(
+      payload,
+      process.env.JWT_KEY!,
+      { expiresIn: '2m' }
+    );
+
+    // Generate Refresh JWT
+    const refreshToken = jwt.sign(
+      payload,
+      process.env.JWT_REFRESH_KEY!,
+      { expiresIn: '7d' } // Valid for 7 days
     );
 
     // Store on session object (cookie)
     req.session = {
-      jwt: userJwt
+      jwt: userJwt,
+      refresh: refreshToken
     };
-    
+
     res.status(200).send(existingUser);
   }
 );

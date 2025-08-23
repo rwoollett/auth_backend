@@ -6,6 +6,7 @@ import cors from 'cors';
 
 import { currentUserRouter } from "./routes/current-user";
 import { currentTokenRouter } from './routes/current-token';
+import { refreshTokenRouter } from './routes/refresh-token';
 import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
@@ -14,11 +15,11 @@ import { NotFoundError } from './errors/not-found-error';
 import { errorHandler } from './middlewares/error-handler';
 
 const envWhitelist = process.env.WHITELIST_CORS ? (process.env.WHITELIST_CORS as string).split(',') : [];
-console.log('envWhitelist',envWhitelist);
+console.log('envWhitelist', envWhitelist);
 const whitelist = [
   'http://localhost:8080'
 ].concat(envWhitelist);
-console.log('Whitelist',whitelist);
+console.log('Whitelist', whitelist);
 const app = express();
 
 app.set('trust proxy', true);
@@ -54,15 +55,19 @@ app.use((
 app.use(
   cookieSession({
     name: "auth:sess",
+    keys: ['jwt', 'refresh'], // Replace with secure keys
+    maxAge: 24 * 60 * 60 * 1000 * 7, // 7 days
     signed: false,
     secure: false,//(process.env.NODE_ENV === 'production'),
     httpOnly: true
+   // domain: "localhost"
     //sameSite: "none" // use with https only
   })
 );
 
 app.use(currentUserRouter);
 app.use(currentTokenRouter);
+app.use(refreshTokenRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
