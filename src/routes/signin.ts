@@ -35,7 +35,6 @@ router.post('/api/users/signin',
       throw new BadRequestError('Invalid credentials');
     }
 
-    // Generate Access JWT
     const payload = {
       id: existingUser.id,
       email: existingUser.email
@@ -43,17 +42,15 @@ router.post('/api/users/signin',
     const userJwt = jwt.sign(
       payload,
       process.env.JWT_KEY!,
-      { expiresIn: '2m' }
+      { expiresIn: process.env.JWT_ACCESS_EXPIRE! }
     );
 
-    // Generate Refresh JWT
     const refreshToken = jwt.sign(
       payload,
       process.env.JWT_REFRESH_KEY!,
-      { expiresIn: '7d' } // Valid for 7 days
+      { expiresIn: process.env.JWT_REFRESH_EXPIRE! } 
     );
 
-    // Store on session object (cookie)
     req.session = {
       jwt: userJwt,
       refresh: refreshToken

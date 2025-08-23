@@ -30,13 +30,12 @@ router.post('/api/users/signup', [
 
     const user = await User.add({ email, password });
 
-    // Generate JWT
     const userJwt = jwt.sign({
       id: user.id,
       email: user.email
     },
       process.env.JWT_KEY!,
-      { expiresIn: '15m' }
+      { expiresIn: process.env.JWT_ACCESS_EXPIRE! }
     );
 
     const refreshToken = jwt.sign(
@@ -45,11 +44,9 @@ router.post('/api/users/signup', [
         email: user.email
       },
       process.env.JWT_REFRESH_KEY!,
-      { expiresIn: '7d' } // Valid for 7 days
+      { expiresIn: process.env.JWT_REFRESH_EXPIRE! } 
     );
 
-
-    // Store on session object (cookie)
     req.session = {
       jwt: userJwt,
       refresh: refreshToken

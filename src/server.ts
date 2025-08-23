@@ -12,6 +12,12 @@ const start = async () => {
   if (!process.env.JWT_REFRESH_KEY) {
     throw new Error('JWT_REFRESH_KEY must be defined');
   }
+  if (!process.env.JWT_ACCESS_EXPIRE) {
+    throw new Error('JWT_ACCESS_EXPIRE must be defined');
+  }
+  if (!process.env.JWT_REFRESH_EXPIRE) {
+    throw new Error('JWT_REFRESH_EXPIRE must be defined');
+  }
   if (!process.env.PORT) {
     throw new Error('PORT must be defined');
   }

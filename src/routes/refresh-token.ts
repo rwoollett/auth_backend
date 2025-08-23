@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import { requireRefreshToken } from '../middlewares/require-refresh';
 import jwt from 'jsonwebtoken';
 import { NotAuthorizedError } from '../errors/not-authorised-error';
@@ -27,10 +27,9 @@ router.post(
       const userJwt = jwt.sign(
         userPayload,
         process.env.JWT_KEY!,
-        { expiresIn: '15m' }
+        { expiresIn: process.env.JWT_ACCESS_EXPIRE! }
       );
 
-      // Store on session object (refresh token cookie)
       const refreshToken = req.session?.refresh;
       req.session = {
         refresh: refreshToken,
