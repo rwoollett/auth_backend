@@ -7,9 +7,9 @@ const documentDB:DocumentDB = {
   async connect (uri: string) {
     try {
       await mongoose.connect(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true
+        //useNewUrlParser: true,
+        //useUnifiedTopology: true,
+        //useCreateIndex: true
       });
       this.client = "Connected";
       return Promise.resolve(new Promise<void>((res) => res()));
