@@ -24,21 +24,21 @@ const documentDB: DocumentDB = {
         AttributeDefinitions: [
           {
             AttributeName: "subject", //ATTRIBUTE_NAME_1
-            AttributeType: "S", //ATTRIBUTE_TYPE
+            AttributeType: "S" as const, //ATTRIBUTE_TYPE
           },
           {
             AttributeName: "id", //ATTRIBUTE_NAME_1
-            AttributeType: "S", //ATTRIBUTE_TYPE
+            AttributeType: "S" as const, //ATTRIBUTE_TYPE
           }
         ],
         KeySchema: [
           {
             AttributeName: "subject", //ATTRIBUTE_NAME_1
-            KeyType: "HASH",
+            KeyType: "HASH" as const,
           },
           {
             AttributeName: "id", //ATTRIBUTE_NAME_1
-            KeyType: "RANGE",
+            KeyType: "RANGE" as const,
           }
         ],
         ProvisionedThroughput: {
@@ -54,21 +54,21 @@ const documentDB: DocumentDB = {
         AttributeDefinitions: [
           {
             AttributeName: "category", //(Registered)
-            AttributeType: "S", //ATTRIBUTE_TYPE
+            AttributeType: "S" as const, //ATTRIBUTE_TYPE
           },
           {
             AttributeName: "id", //ATTRIBUTE_NAME_1
-            AttributeType: "S", //ATTRIBUTE_TYPE
+            AttributeType: "S" as const, //ATTRIBUTE_TYPE
           }
         ],
         KeySchema: [
           {
             AttributeName: "category", //ATTRIBUTE_NAME_1
-            KeyType: "HASH"
+            KeyType: "HASH" as const
           },
           {
             AttributeName: "id", //ATTRIBUTE_NAME_1
-            KeyType: "RANGE",
+            KeyType: "RANGE" as const,
           }
         ],
         ProvisionedThroughput: {

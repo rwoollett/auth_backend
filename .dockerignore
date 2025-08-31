@@ -1,5 +1,4 @@
-# node_modules
+node_modules
 .git/
 dist
 docker-compose.yml
-.env
